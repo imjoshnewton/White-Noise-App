@@ -195,10 +195,13 @@ h4 {
 	font-family: serif;
 	font-size: 13px;
 }
+#background-refresh {
+	font-size: 14px;
+	padding: 6px 12px 6px 12px;
+}
 
 button { 
 	outline: none; 
-	border: none; 
 	color: #fff; 
 	background-color: inherit;
 	border: 1px solid #fff; 
@@ -305,6 +308,7 @@ input[type='range']::-ms-thumb {
     position: relative; width: 75px;
     -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
 	margin: auto;
+	display: none;
 }
 .onoffswitch-checkbox {
     display: none;

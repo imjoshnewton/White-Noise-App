@@ -37,6 +37,7 @@ var maxVolume = 0.25;
 var fadeInt;
 var extfadeInt;
 var lightsUp = true;
+var flip = 0;
 var background = new UnsplashPhoto().all().fromCategory("nature").of(["trees", "mountains"]).size(1600, 900).fetch();
 
 // Move to the next sound. (Right arrow.)
@@ -173,6 +174,7 @@ $(document).ready(function() {
 	$noiseTypeDisplay = $('#noise-type-display');
 	$playPauseBtn = $('#playpausebtn');
 	$volumeSlider = $('#volumeslider');
+	$backgroundRefresh = $('#background-refresh');
 	$binauralBeatSwitch = $('#myonoffswitch');
 	$backgroundOverlay = $('#background-overlay');
 	
@@ -230,6 +232,13 @@ $(document).ready(function() {
 	   });
    	});
    
+   	$($backgroundRefresh).click(function(){
+	   background = new UnsplashPhoto().all().fromCategory("nature").of(["trees", "mountains"]).size(1600+flip, 900).fetch();
+	   //console.log(background);
+	   $('body').css("background-image", 'url(' + background + ')');
+	   ++flip;
+   	});
+	
    	$($binauralBeatSwitch).change(function(){
 	   if($(this).is(':checked')){
 		   background = "images/nighthawks.jpg";

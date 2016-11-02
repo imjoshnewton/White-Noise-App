@@ -7,15 +7,15 @@
 		"uuidString": "1AF6C928-AA7D-4CD6-B437-448576C61095"
 		},
 	{
-		"name": "SFTP Files",
-		"scriptSourceString": "# Paste your script here.\n#scp -r .\/* root@45.55.246.30:\/var\/www\/html",
+		"name": "Copy Files to Github",
+		"scriptSourceString": "# Paste your script here.\nscp -r .\/build\/* \/Volumes\/Macintosh\\ HD\/Dropbox\/Development\/Web\/www\/sites\/White-Noise-App\/",
 		"scriptType": 1,
 		"scriptUUIDString": "A87BFEDD-A24F-477B-85BC-E7F814709934",
 		"stepType": 2,
 		"uuidString": "92899AC7-0734-46A8-B2BD-260D731119D3"
 		}
 	],
-"creatorBuild": "25390",
+"creatorBuild": "25428",
 "files": {
 	"\/bower.json": {
 		"ft": 524288,
@@ -1177,12 +1177,6 @@
 		"sC": 1,
 		"tS": 0
 		},
-	"\/build": {
-		"ft": 65536,
-		"oA": 1,
-		"oAP": "\/build\/build",
-		"oF": 0
-		},
 	"\/css\/animate.css": {
 		"aP": 0,
 		"bl": 0,
@@ -1334,10 +1328,10 @@
 	},
 "projectAttributes": {
 	"creationDate": 499697135,
-	"displayValue": "White Noise 2.0",
+	"displayValue": "White Noise 2.0.3",
 	"displayValueWasSetByUser": 1,
 	"iconImageName": "meme-angryPicard",
-	"lastBuiltDate": 499753572
+	"lastBuiltDate": 499792651
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
@@ -1354,6 +1348,9 @@
 	"babelModuleID": "",
 	"babelNoComments": 0,
 	"babelPlugins": {
+		"async-generator-functions": {
+			"active": 0
+			},
 		"async-to-generator": {
 			"active": 0
 			},
@@ -2442,6 +2439,10 @@
 			"active": 0,
 			"optionString": "{'ignoreDestructuring': false, 'ignoreImport': false, 'ignoreExport': false}"
 			},
+		"no-useless-return": {
+			"active": 0,
+			"optionString": ""
+			},
 		"no-var": {
 			"active": 0,
 			"optionString": ""
@@ -2509,10 +2510,6 @@
 		"prefer-numeric-literals": {
 			"active": 0,
 			"optionString": ""
-			},
-		"prefer-reflect": {
-			"active": 0,
-			"optionString": "{'exceptions': []}"
 			},
 		"prefer-rest-params": {
 			"active": 0,
