@@ -17,6 +17,12 @@
 	],
 "creatorBuild": "25428",
 "files": {
+	"\/ambiance\/SomethingICanAlmostRemember.mp3": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/build\/ambiance\/SomethingICanAlmostRemember.mp3",
+		"oF": 0
+		},
 	"\/bower.json": {
 		"ft": 524288,
 		"oA": 1,
@@ -1177,6 +1183,12 @@
 		"sC": 1,
 		"tS": 0
 		},
+	"\/build": {
+		"ft": 65536,
+		"oA": 1,
+		"oAP": "\/build\/build",
+		"oF": 0
+		},
 	"\/css\/animate.css": {
 		"aP": 0,
 		"bl": 0,
@@ -1285,6 +1297,12 @@
 		"oAP": "\/build\/noise\/Crickets.mp3",
 		"oF": 0
 		},
+	"\/noise\/Crickets2.mp3": {
+		"ft": 8192,
+		"oA": 2,
+		"oAP": "\/build\/noise\/Crickets2.mp3",
+		"oF": 0
+		},
 	"\/noise\/Vinyl.mp3": {
 		"ft": 8192,
 		"oA": 2,
@@ -1331,7 +1349,7 @@
 	"displayValue": "White Noise 2.0.3",
 	"displayValueWasSetByUser": 1,
 	"iconImageName": "meme-angryPicard",
-	"lastBuiltDate": 499792651
+	"lastBuiltDate": 499831638
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,

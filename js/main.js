@@ -34,9 +34,11 @@ var audioplayer;
 var extraplayer;
 var source;
 var maxVolume = 0.25;
+var maxVolume2 = 0.75;
 var fadeInt;
 var extfadeInt;
 var lightsUp = true;
+var ambianceOn = false;
 var flip = 0;
 var background = new UnsplashPhoto().all().fromCategory("nature").of(["trees", "mountains"]).size(1600, 900).fetch();
 
@@ -76,7 +78,7 @@ function updateSource() {
 			source.src='noise/Vinyl.mp3';
 	        break;
 	    case "Crickets":
-			source.src='noise/Crickets.mp3';
+			source.src='noise/Crickets2.mp3';
 	        break;
 	    default:
 			source.src='noise/00.mp3';
@@ -125,10 +127,11 @@ function decVolume(interval) {
 	}
 }
 
-// Bring volume up from 0 to maxVolume
+// Bring volume up from 0 to maxVolume2
 function extfadeIn(interval) {
 	clearInterval(extfadeInt);
 	extraplayer.volume = 0;
+	extraplayer.play();
 	extfadeInt = setInterval (extincVolume, interval);
 }
 
@@ -136,12 +139,15 @@ function extfadeIn(interval) {
 function extfadeOut(interval) {
 	clearInterval(extfadeInt);
 	extfadeInt = setInterval (extdecVolume, interval);
+	
+	clearInterval(extfadeInt);
+	extfadeInt = setTimeout(extraplayer.pause(), interval);
 }
 
 // Increase the volume 
 function extincVolume(interval) {
-	if(extraplayer.volume >= maxVolume) {
-		extraplayer.volume = maxVolume;
+	if(extraplayer.volume >= maxVolume2) {
+		extraplayer.volume = maxVolume2;
 		clearInterval(extfadeInt);
 	}
 	else {
@@ -162,7 +168,7 @@ function extdecVolume(interval) {
 
 /** animation end instances for different browsers and cache variables for DOM objects **/
 var animationEnd = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
-var $audioControlsClass, $noiseTypeDisplay, $playPauseBtn, $volumeSlider, $binauralBeatSwitch, $backgroundOverlay;
+var $audioControlsClass, $noiseTypeDisplay, $playPauseBtn, $volumeSlider, $ambianceSlider, $binauralBeatSwitch, $backgroundOverlay, $backgroundRefresh;
 
 $(document).ready(function() {
 	
@@ -174,6 +180,7 @@ $(document).ready(function() {
 	$noiseTypeDisplay = $('#noise-type-display');
 	$playPauseBtn = $('#playpausebtn');
 	$volumeSlider = $('#volumeslider');
+	$ambianceSlider = $('#ambiancevolume');
 	$backgroundRefresh = $('#background-refresh');
 	$binauralBeatSwitch = $('#myonoffswitch');
 	$backgroundOverlay = $('#background-overlay');
@@ -183,7 +190,7 @@ $(document).ready(function() {
 	source = document.getElementById("noise-type");
 	extraplayer = document.getElementById("extra-player");
 	audioplayer.volume = 0.25;
-	extraplayer.volume = 0.25;
+	extraplayer.volume = 0.75;
 	
 	/** Set Background Image **/
 	$('body').css("background-image", 'url(' + background + ')');
@@ -193,16 +200,22 @@ $(document).ready(function() {
    
    	/** Interface Control Handlers **/
 	$($playPauseBtn).click(function(){
-	   if(audioplayer.paused) { fadeIn(25); }
-	   else { fadeOut(10); }
+	   if(audioplayer.paused && ambianceOn) { fadeIn(25); extfadeIn(25); console.log("first if"); }
+	   else if(audioplayer.paused && !ambianceOn) { fadeIn(25); console.log("second if"); }
+	   else { fadeOut(10); extfadeOut(10); console.log("else"); }
    	}); 
    
    	$($volumeSlider).on('input', function() {
 	   maxVolume = $(this).val() / 100;
 	   
 	   audioplayer.volume = maxVolume;
-	   extraplayer.volume = maxVolume;
    	});
+	
+	$($ambianceSlider).on('input', function() {
+		maxVolume2 = $(this).val() / 100;
+	
+		extraplayer.volume = maxVolume2;
+	});
    
    	$('#type-right').click(function() {
 	   nextSound();
@@ -240,14 +253,11 @@ $(document).ready(function() {
    	});
 	
    	$($binauralBeatSwitch).change(function(){
-	   if($(this).is(':checked')){
-		   background = "images/nighthawks.jpg";
-		   $('body').css("background-image", 'url(' + background + ')');
-	   }
-	   else { 
-		   background = new UnsplashPhoto().all().fromCategory("nature").of(["trees", "mountains"]).size(1600, 900).fetch();
-		   $('body').css("background-image", 'url(' + background + ')');
-	   }
+	   if($(this).is(':checked')){ ambianceOn = true; }
+	   else { ambianceOn = false; }
+	   
+	   if(!audioplayer.paused && ambianceOn) { extfadeIn(25); }
+	   else { extfadeOut(10); }
    	});
    
    	$('#lights-toggle').click(function(){

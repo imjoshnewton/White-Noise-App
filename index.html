@@ -26,7 +26,7 @@
 		  <source id="noise-type" src="noise/00.mp3" type="audio/mpeg">
 		</audio>
 		<audio id="extra-player" loop preload="auto">
-		  <source id="extnoise-type" src="noise/00.mp3" type="audio/mpeg">
+		  <source id="extnoise-type" src="ambiance/SomethingICanAlmostRemember.mp3" type="audio/mpeg">
 		</audio>
 		
 		<div id="background-overlay"> <!--Overlay Container -->
@@ -51,6 +51,13 @@
 							<h4>background</h4>
 							
 							<button id="background-refresh" class="type-button" data-icon="&#xe02a;"></button>
+						</div>
+					</div>
+					
+					<div id="ambiance-continer" class="clearfix">
+						<div id="ambiance-toggle">
+							<h4>ambiance</h4>
+						
 							<div class="onoffswitch">
 							    <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="myonoffswitch">
 							    <label class="onoffswitch-label" for="myonoffswitch">
@@ -59,6 +66,7 @@
 							    </label>
 							</div>
 						</div>
+						<input id="ambiancevolume" type="range" min="0" max="100" value="75" step="1">
 					</div>
 					
 					<div id="lights-container">
