@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>White Noise App v2.0.3</title>
+		<title>White Noise App v2.0.4</title>
 		
 		<!-- Mobile optimization and mobile app abilities -->
 		<meta name="viewport" content="width=device-width initial-scale=1" />
@@ -32,7 +32,7 @@
 				<div class="audio-controls">
 				
 					<button id="playpausebtn"><span data-icon="&#x45;"></span></button>
-					<input id="volumeslider" type="range" min="0" max="100" value="25" step="1">
+					<input id="mastervolume" type="range" min="0" max="100" value="90" step="1">
 					
 					<div id="settings-container" class="clearfix">
 						<div id="noise-type">
@@ -40,16 +40,9 @@
 							<button id="type-left" class="type-button" data-icon="&#x34;"></button>
 							<span id="noise-type-display" class="effect-display"></span>
 							<button id="type-right" class="type-button" data-icon="&#x35;"></button>
+							<input id="noisevolume" type="range" min="0" max="100" value="25" step="1">
 						</div>
 						
-						<div id="binaural-beat">
-							<h4>background</h4>
-							
-							<button id="background-refresh" class="type-button" data-icon="&#xe02a;"></button>
-						</div>
-					</div>
-					
-					<div id="ambiance-continer" class="clearfix">
 						<div id="ambiance-toggle">
 							<h4>ambiance</h4>
 						
@@ -60,8 +53,15 @@
 							        <span class="onoffswitch-switch"></span>
 							    </label>
 							</div>
+							<input id="ambiancevolume" type="range" min="0" max="100" value="75" step="1">
 						</div>
-						<input id="ambiancevolume" type="range" min="0" max="100" value="75" step="1">
+					</div>
+					
+					<div id="environment-container" class="clearfix">
+						<div id="background">
+							<h4>background</h4>
+							<button id="background-refresh" class="type-button" data-icon="&#xe02a;"></button>
+						</div>
 					</div>
 					
 					<div id="lights-container">
