@@ -37,7 +37,7 @@
 new WOW().init();
 
 /** Initialize Utility Variables **/
-var allSounds = ["Noise", "Vinyl", "Crickets"];
+var allSounds = ["Noise", "Vinyl", "Crickets", "Off"];
 var soundIndex = 0;
 var whichSound = allSounds[soundIndex];
 var audioplayer;
@@ -91,6 +91,9 @@ function updateSource() {
 	    case "Crickets":
 			source.src='noise/Crickets2.mp3';
 	        break;
+		case "Off":
+			source.src='';
+			break;
 	    default:
 			source.src='noise/00.mp3';
 	}
@@ -191,7 +194,7 @@ $(document).ready(function() {
 	$audioControlsClass = $('.audio-controls');
 	$noiseTypeDisplay = $('#noise-type-display');
 	$playPauseBtn = $('#playpausebtn');
-	$masterVolume = $('#mastervolume')
+	$masterVolume = $('#mastervolume');
 	$noiseVolume = $('#noisevolume');
 	$ambianceVolume = $('#ambiancevolume');
 	$backgroundRefresh = $('#background-refresh');
@@ -213,24 +216,24 @@ $(document).ready(function() {
    
    	/** Interface Control Handlers **/
 	$($playPauseBtn).click(function(){
-	   if(audioplayer.paused && ambianceOn) { fadeIn(25); extfadeIn(25); console.log("first if"); }
-	   else if(audioplayer.paused && !ambianceOn) { fadeIn(25); console.log("second if"); }
-	   else { fadeOut(10); extfadeOut(10); console.log("else"); }
+	   if(audioplayer.paused && ambianceOn) { fadeIn(25); extfadeIn(25); }
+	   else if(audioplayer.paused && !ambianceOn) { fadeIn(25); }
+	   else { fadeOut(10); extfadeOut(10); }
    	}); 
    
-   	$($noiseVolume).on('input', function() {
+   	$($noiseVolume).on('input', 'change', function() {
 	   maxVolume = $(this).val() / 100;
 	   
 	   audioplayer.volume = maxVolume * masterVolume;
    	});
 	
-	$($ambianceVolume).on('input', function() {
+	$($ambianceVolume).on('input', 'change', function() {
 		maxVolume2 = $(this).val() / 100;
 	
 		extraplayer.volume = maxVolume2 * masterVolume;
 	});
 	
-	$($masterVolume).on('input', function(){
+	$($masterVolume).on('input', 'change', function(){
 		masterVolume = $(this).val() / 100;
 		
 		audioplayer.volume = maxVolume * masterVolume;

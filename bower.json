@@ -34,6 +34,7 @@
   "private": true,
   "dependencies": {
     "jquery": "^3.1.1",
-    "unsplash-source-js": "unsplash-source#*"
+    "unsplash-source-js": "unsplash-source#*",
+    "wow": "WOW#^1.1.2"
   }
 }
