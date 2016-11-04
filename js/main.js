@@ -1,5 +1,5 @@
 /*
-	Name: 		White Noise App 2.0.3
+	Name: 		White Noise App 2.0.4
 	
 	Updates:	Updated sound framework to use 
 				HTML5 Audio instead of Create.js. 
@@ -14,10 +14,20 @@
 				Preload initial audio file on 
 				initial application load. Added 
 				Unsplash nature photo as default
-				background.
+				background. Added seperate volume
+				controls for noise and ambiance 
+				players as well as a master volume
+				that controls both players together.
+				Adjusted layout items to be more 
+				categorically focused by seperating
+				sound controls and environmental or
+				asthetic controls.
 						
 	To-Dos:		Seemless Looping 
-				Volume based on mobile detection
+				Add new sounds to sound list
+				Create toggle for lights up and down
+				Put background and lights in same row
+				Volumes based on mobile detection
 				Fave Icon as Album Artwork on MP3s
 				Fast loading / caching of audio files
 				Clean up Unused Code and Files
@@ -33,6 +43,7 @@ var whichSound = allSounds[soundIndex];
 var audioplayer;
 var extraplayer;
 var source;
+var masterVolume = 0.90;
 var maxVolume = 0.25;
 var maxVolume2 = 0.75;
 var fadeInt;
@@ -168,7 +179,8 @@ function extdecVolume(interval) {
 
 /** animation end instances for different browsers and cache variables for DOM objects **/
 var animationEnd = "webkitAnimationEnd mozAnimationEnd MSAnimationEnd oanimationend animationend";
-var $audioControlsClass, $noiseTypeDisplay, $playPauseBtn, $volumeSlider, $ambianceSlider, $binauralBeatSwitch, $backgroundOverlay, $backgroundRefresh;
+var $audioControlsClass, $noiseTypeDisplay, $playPauseBtn, $masterVolume, $noiseVolume;
+var $ambianceVolume, $ambianceSwitch, $backgroundOverlay, $backgroundRefresh;
 
 $(document).ready(function() {
 	
@@ -179,10 +191,11 @@ $(document).ready(function() {
 	$audioControlsClass = $('.audio-controls');
 	$noiseTypeDisplay = $('#noise-type-display');
 	$playPauseBtn = $('#playpausebtn');
-	$volumeSlider = $('#volumeslider');
-	$ambianceSlider = $('#ambiancevolume');
+	$masterVolume = $('#mastervolume')
+	$noiseVolume = $('#noisevolume');
+	$ambianceVolume = $('#ambiancevolume');
 	$backgroundRefresh = $('#background-refresh');
-	$binauralBeatSwitch = $('#myonoffswitch');
+	$ambianceSwitch = $('#myonoffswitch');
 	$backgroundOverlay = $('#background-overlay');
 	
 	/** Initialize Audio Player Objects **/
@@ -205,16 +218,23 @@ $(document).ready(function() {
 	   else { fadeOut(10); extfadeOut(10); console.log("else"); }
    	}); 
    
-   	$($volumeSlider).on('input', function() {
+   	$($noiseVolume).on('input', function() {
 	   maxVolume = $(this).val() / 100;
 	   
-	   audioplayer.volume = maxVolume;
+	   audioplayer.volume = maxVolume * masterVolume;
    	});
 	
-	$($ambianceSlider).on('input', function() {
+	$($ambianceVolume).on('input', function() {
 		maxVolume2 = $(this).val() / 100;
 	
-		extraplayer.volume = maxVolume2;
+		extraplayer.volume = maxVolume2 * masterVolume;
+	});
+	
+	$($masterVolume).on('input', function(){
+		masterVolume = $(this).val() / 100;
+		
+		audioplayer.volume = maxVolume * masterVolume;
+		extraplayer.volume = maxVolume2 * masterVolume;
 	});
    
    	$('#type-right').click(function() {
@@ -246,18 +266,18 @@ $(document).ready(function() {
    	});
    
    	$($backgroundRefresh).click(function(){
+		++flip;
 	   background = new UnsplashPhoto().all().fromCategory("nature").of(["trees", "mountains"]).size(1600+flip, 900).fetch();
-	   //console.log(background);
+	   
 	   $('body').css("background-image", 'url(' + background + ')');
-	   ++flip;
    	});
 	
-   	$($binauralBeatSwitch).change(function(){
+   	$($ambianceSwitch).change(function(){
 	   if($(this).is(':checked')){ ambianceOn = true; }
 	   else { ambianceOn = false; }
 	   
 	   if(!audioplayer.paused && ambianceOn) { extfadeIn(25); }
-	   else { extfadeOut(10); }
+	   else { extfadeOut(20); }
    	});
    
    	$('#lights-toggle').click(function(){

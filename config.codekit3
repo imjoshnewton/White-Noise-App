@@ -1346,10 +1346,10 @@
 	},
 "projectAttributes": {
 	"creationDate": 499697135,
-	"displayValue": "White Noise 2.0.3",
+	"displayValue": "White Noise 2.0.4",
 	"displayValueWasSetByUser": 1,
 	"iconImageName": "meme-angryPicard",
-	"lastBuiltDate": 499831638
+	"lastBuiltDate": 499832831
 	},
 "projectSettings": {
 	"abortBuildOnError": 1,
