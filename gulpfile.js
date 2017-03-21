@@ -9,6 +9,7 @@ var uglify = require('gulp-uglify');
 var gulpIf = require('gulp-if');
 var gutil = require('gulp-util');
 var sourcemaps = require('gulp-sourcemaps');
+var imagemin = require('gulp-imagemin');
 
 gulp.task('sass', function () {
   return gulp.src('source/css/*.scss')
@@ -36,15 +37,34 @@ gulp.task('useref', function () {
     }))
 })
 
+gulp.task('audio', ['noise', 'ambiance']);
+
+gulp.task('noise', function () {
+  return gulp.src('source/noise/**/*.mp3')
+    .pipe(gulp.dest('build/noise'))
+})
+
+gulp.task('ambiance', function () {
+  return gulp.src('source/ambiance/**/*.mp3')
+    .pipe(gulp.dest('build/ambiance'))
+})
+
+gulp.task('images', function(){
+  return gulp.src('source/img/**/*.+(png|jpg|gif|svg)')
+  .pipe(imagemin())
+  .pipe(gulp.dest('build/img'))
+})
+
 gulp.task('browserSync', function () {
   browserSync.init({
     server: {
       baseDir: 'build'
-    }
+    },
+    browser: "google chrome"
   })
 })
 
-gulp.task('default', ['sass', 'useref', 'browserSync'], function () {
+gulp.task('default', ['sass', 'useref', 'audio', 'images', 'browserSync'], function () {
   gulp.watch('source/css/**/*.scss', ['sass'])
   gulp.watch('source/*.html', ['useref'])
   gulp.watch('source/js/**/*.js', ['useref'])

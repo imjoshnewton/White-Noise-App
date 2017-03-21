@@ -7,15 +7,30 @@
 //
 ////////////////////////////////////////////////////////////////////////////////
 
+// includes
+
 @import 'bourbon/bourbon';
 @import 'base/base';
 
-$darkgrey-rgba: rgba(21, 21, 21, .5);
-$grey-overlay: linear-gradient($darkgrey-rgba, $darkgrey-rgba);
+// Colors
+
+$medium-grey: #999;
 $white: #fff;
 
+$darkgrey50: rgba(21, 21, 21, .5);
+$greyblue50: rgba(112, 121, 127, .5);
+$lightgrey30: rgba(125, 125, 125, .3);
+
+// compounded colors and gradients
+
+$grey-overlay: linear-gradient($darkgrey50, $darkgrey50);
+
+// other
+
+$background-url: 'https://source.unsplash.com/igmaRVtMhqg/853x480';
+
 body {
-  background: $grey-overlay, url('https://source.unsplash.com/igmaRVtMhqg/853x480') center center no-repeat;
+  background: $grey-overlay, url($background-url) center center no-repeat;
   background-size: cover;
   color: $white;
 }
@@ -30,6 +45,10 @@ button {
 
 h4 {
   margin-top: .75rem;
+}
+
+label {
+  margin-bottom: 0;
 }
 
 .wn-container {
@@ -55,6 +74,10 @@ h4 {
 .wn-playpause {
   flex: 1 1 100%;
   min-height: 90px;
+
+  i {
+    transition: all .5s ease-in-out;
+  }
 }
 
 .wn-mastervolume {
@@ -143,49 +166,76 @@ h4 {
 // On/Off Switch Styling
 
 .onoffswitch {
-    position: relative; width: 75px;
-    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
-	margin: auto;
+  margin: auto;
+  position: relative;
+  user-select: none;
+  width: 75px;
 }
+
 .onoffswitch-checkbox {
-    display: none;
+  display: none;
 }
+
 .onoffswitch-label {
-    display: block; overflow: hidden; cursor: pointer;
-    border: 2px solid #999999; border-radius: 3px;
+  border: 2px solid $medium-grey;
+  border-radius: 3px;
+  cursor: pointer;
+  display: block;
+  overflow: hidden;
 }
+
 .onoffswitch-inner {
-    display: block; width: 200%; margin-left: -100%;
-    transition: margin 0.3s ease-in 0s;
+  display: block;
+  margin-left: -100%;
+  transition: margin .3s ease-in 0s;
+  width: 200%;
 }
-.onoffswitch-inner:before, .onoffswitch-inner:after {
-    display: block; float: left; width: 50%; height: 24px; padding: 0; line-height: 24px;
-    font-size: 14px; color: white; font-family: serif; /*font-weight: bold;*/
-    box-sizing: border-box;
+
+.onoffswitch-inner::before,
+.onoffswitch-inner::after {
+  box-sizing: border-box;
+  color: $white;
+  display: block;
+  float: left;
+  font-family: serif;
+  font-size: 14px;
+  height: 24px;
+  line-height: 24px;
+  padding: 0;
+  width: 50%;
 }
-.onoffswitch-inner:before {
-    content: "ON";
-    padding-left: 11px;
-    background-color: rgba(112,121,127,0.5); color: #FFFFFF;
-	text-align: left;
+
+.onoffswitch-inner::before {
+  background-color: $greyblue50;
+  color: $white;
+  content: 'ON';
+  padding-left: 11px;
+  text-align: left;
 }
-.onoffswitch-inner:after {
-    content: "OFF";
-    padding-right: 10px;
-    background-color: rgba(125,125,125,0.3); color: #999999;
-    text-align: right;
+
+.onoffswitch-inner::after {
+  background-color: $lightgrey30;
+  color: $medium-grey;
+  content: 'OFF';
+  padding-right: 10px;
+  text-align: right;
 }
+
 .onoffswitch-switch {
-    display: block; width: 26px; margin: -1px;
-    background: #FFFFFF;
-    position: absolute; top: 0; bottom: 0;
-    right: 47px;
-    border: 2px solid #999999; border-radius: 3px;
-    transition: all 0.3s ease-in 0s;
+  @include position(absolute, 0 47px 0 null);
+  background: $white;
+  border: 2px solid $medium-grey;
+  border-radius: 3px;
+  display: block;
+  margin: -1px;
+  transition: all .3s ease-in 0s;
+  width: 26px;
 }
+
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
-    margin-left: 0;
+  margin-left: 0;
 }
+
 .onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
-    right: 0px;
+  right: 0;
 }
