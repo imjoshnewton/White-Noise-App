@@ -1,0 +1,66 @@
+<html>
+	<head>
+		<title>White Noise App v2.0.4</title>
+
+		<!-- Mobile optimization and mobile app abilities -->
+		<meta name="viewport" content="width=device-width initial-scale=1" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+
+		<!-- Links to fave and movile icons and stylesheets -->
+		<link rel="icon" href="img/favicon.png" />
+		<link rel="apple-touch-icon" href="img/favicon.png" />
+		<link rel="stylesheet" href="css/style.css" />
+	</head>
+
+	<body>
+		<audio id="audio-player" loop preload="auto">
+		  <source id="noise-type" src="noise/00.mp3" type="audio/mpeg">
+		</audio>
+		<audio id="extra-player" loop preload="auto">
+		  <source id="extnoise-type" src="ambiance/SomethingICanAlmostRemember.mp3" type="audio/mpeg">
+		</audio>
+
+		<div class="wn-container"> <!--Page Container-->
+			<div class="wn-player"> <!--Player Container-->
+        <button class="wn-playpause"><i class="fa fa-play" aria-hidden="true"></i></button>
+        <input class="wn-mastervolume" type="range" min="0" max="100" value="90" step="1">
+
+        <div class="wn-noisetype">
+          <h4>type</h4>
+
+          <button class="wn-typebutton left"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+          <h5 class="wn-type">NOISE</h5>
+          <button class="wn-typebutton right"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+
+          <input class="wn-noisevolume" type="range" min="0" max="100" value="25" step="1">
+        </div>
+
+        <div class="wn-ambiance">
+          <h4>ambiance</h4>
+
+          <div class="onoffswitch">
+              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="wn-amb-onoff">
+              <label class="onoffswitch-label" for="wn-amb-onoff">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+              </label>
+          </div>
+
+          <input class="wn-ambiancevolume" type="range" min="0" max="100" value="75" step="1">
+        </div>
+
+        <button class="wn-lightstoggle">
+          <h4>turn down the lights</h4>
+        </button>
+
+			</div> <!--Player Container-->
+		</div> <!--Page Container-->
+
+    <!--scripts-->
+    <script src="https://use.fontawesome.com/cc0b1539f7.js"></script>
+    <!--build:js js/main.min.js -->
+    <script src="../bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="js/main.js" async></script>
+    <!-- endbuild -->
+	</body>
+</html>

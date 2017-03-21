@@ -1,0 +1,191 @@
+////////////////////////////////////////////////////////////////////////////////
+//
+//		SASS for White Noise App
+//		Version: 3.0
+//		Updated: 3/20/17
+//		Notes:	Style re-write
+//
+////////////////////////////////////////////////////////////////////////////////
+
+@import 'bourbon/bourbon';
+@import 'base/base';
+
+$darkgrey-rgba: rgba(21, 21, 21, .5);
+$grey-overlay: linear-gradient($darkgrey-rgba, $darkgrey-rgba);
+$white: #fff;
+
+body {
+  background: $grey-overlay, url('https://source.unsplash.com/igmaRVtMhqg/853x480') center center no-repeat;
+  background-size: cover;
+  color: $white;
+}
+
+button {
+  background: transparent;
+
+  &:hover {
+    background: $grey-overlay;
+  }
+}
+
+h4 {
+  margin-top: .75rem;
+}
+
+.wn-container {
+  align-items: center;
+  background: transparent;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  width: 100vw;
+}
+
+.wn-player {
+  align-items: center;
+  background: $grey-overlay;
+  border: 2px $white solid;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  max-height: 720px;
+  max-width: 380px;
+}
+
+.wn-playpause {
+  flex: 1 1 100%;
+  min-height: 90px;
+}
+
+.wn-mastervolume {
+  flex: 1 1 70%;
+  margin: 1.5rem;
+}
+
+.wn-noisetype {
+  align-items: center;
+  border-bottom: 2px $white solid;
+  border-right: 1px $white solid;
+  border-top: 2px $white solid;
+  display: flex;
+  flex: 1 1 50%;
+  flex-flow: row wrap;
+  justify-content: center;
+  min-height: 150px;
+
+  h4 {
+    flex: 1 1 100%;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  h5 {
+    margin: 0 .5rem;
+  }
+
+  .wn-typebutton {
+    border: 1px $white solid;
+    border-radius: 6px;
+    flex: 1 1 20%;
+    max-width: 20%;
+    padding: 1rem;
+  }
+
+  .wn-noisevolume {
+    flex: 1 1 70%;
+    margin: .75rem 1rem;
+  }
+}
+
+.wn-ambiance {
+  align-items: center;
+  border-bottom: 2px $white solid;
+  border-left: 1px $white solid;
+  border-top: 2px $white solid;
+  display: flex;
+  flex: 1 1 50%;
+  flex-flow: row wrap;
+  justify-content: center;
+  min-height: 150px;
+
+  h4 {
+    flex: 1 1 100%;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  .wn-ambiancevolume {
+    flex: 1 1 70%;
+    margin: .75rem 1rem;
+  }
+}
+
+.wn-lightstoggle {
+  align-items: center;
+  display: flex;
+  flex: 1 1 100%;
+  justify-content: center;
+  min-height: 50px;
+
+  h4 {
+    flex: 1;
+    margin: 0;
+    text-align: center;
+    text-transform: uppercase;
+  }
+}
+
+
+
+
+
+
+// On/Off Switch Styling
+
+.onoffswitch {
+    position: relative; width: 75px;
+    -webkit-user-select:none; -moz-user-select:none; -ms-user-select: none;
+	margin: auto;
+}
+.onoffswitch-checkbox {
+    display: none;
+}
+.onoffswitch-label {
+    display: block; overflow: hidden; cursor: pointer;
+    border: 2px solid #999999; border-radius: 3px;
+}
+.onoffswitch-inner {
+    display: block; width: 200%; margin-left: -100%;
+    transition: margin 0.3s ease-in 0s;
+}
+.onoffswitch-inner:before, .onoffswitch-inner:after {
+    display: block; float: left; width: 50%; height: 24px; padding: 0; line-height: 24px;
+    font-size: 14px; color: white; font-family: serif; /*font-weight: bold;*/
+    box-sizing: border-box;
+}
+.onoffswitch-inner:before {
+    content: "ON";
+    padding-left: 11px;
+    background-color: rgba(112,121,127,0.5); color: #FFFFFF;
+	text-align: left;
+}
+.onoffswitch-inner:after {
+    content: "OFF";
+    padding-right: 10px;
+    background-color: rgba(125,125,125,0.3); color: #999999;
+    text-align: right;
+}
+.onoffswitch-switch {
+    display: block; width: 26px; margin: -1px;
+    background: #FFFFFF;
+    position: absolute; top: 0; bottom: 0;
+    right: 47px;
+    border: 2px solid #999999; border-radius: 3px;
+    transition: all 0.3s ease-in 0s;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-inner {
+    margin-left: 0;
+}
+.onoffswitch-checkbox:checked + .onoffswitch-label .onoffswitch-switch {
+    right: 0px;
+}

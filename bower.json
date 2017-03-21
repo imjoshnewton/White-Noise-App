@@ -1,9 +1,9 @@
 {
-  "name": "my-new-project",
+  "name": "white-noise-app",
   "authors": [
-    "John Doe <john@doe.com> (http://johndoe.com)"
+    "Josh Newton <josh@imjoshnewton.me> (http://imjoshnewton.me)"
   ],
-  "description": "CodeKit automatically generated this file. You should customize it according to: https://github.com/bower/spec/blob/master/json.md",
+  "description": "A borswer based application for playing ambiant noise and music for concentration, relaxation, and sleep.",
   "main": [
     "index.html",
     "main.js"
@@ -22,7 +22,7 @@
   "homepage": "https://google.com",
   "repository": {
     "type": "git",
-    "url": "git://github.com/foo/bar.git"
+    "url": "git@github.com/newtonjd1:White-Noise-App.git"
   },
   "ignore": [
     "**/.*",
@@ -33,8 +33,6 @@
   ],
   "private": true,
   "dependencies": {
-    "jquery": "^3.1.1",
-    "unsplash-source-js": "unsplash-source#*",
-    "wow": "WOW#^1.1.2"
+    "jquery": "^3.1.1"
   }
 }
