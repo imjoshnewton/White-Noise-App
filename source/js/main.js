@@ -22,7 +22,10 @@ $(document).ready(function() {
       $masterVolume = $('.wn-mastervolume'),
       $noiseVolume = $('.wn-noisevolume'),
       $noiseType = $('.wn-type'),
-      $ambianceVolume = $('.wn-ambiancevolume');
+      $ambianceVolume = $('.wn-ambiancevolume'),
+      $prevSoundBtn = $('.wn-typebutton.left'),
+      $nextSoundBtn = $('.wn-typebutton.right'),
+      $ambianceOnCheck = $('#wn-amb-onoff');
 
   $noiseType.html(audioplayer.getCurrentSound());
 
@@ -30,17 +33,29 @@ $(document).ready(function() {
     $(this).children('.fa').toggleClass('fa-play').toggleClass('fa-pause');
 
     audioplayer.playPause();
-  })
+  });
 
   $masterVolume.on('input', function () {
     audioplayer.setMasterVolume($(this).val()/100);
-  })
+  });
+
+  $prevSoundBtn.click(function () {
+    audioplayer.prevSound();
+  });
+
+  $nextSoundBtn.click(function () {
+    audioplayer.nextSound();
+  });
 
   $noiseVolume.on('input', function () {
     audioplayer.setSoundVolume($(this).val()/100);
-  })
+  });
 
   $ambianceVolume.on('input', function () {
     audioplayer.setAmbianceVolume($(this).val()/100);
-  })
+  });
+
+  $ambianceOnCheck.change(function () {
+    audioplayer.toggleAmbiance();
+  });
 });
