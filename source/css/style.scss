@@ -12,27 +12,36 @@
 @import 'bourbon/bourbon';
 @import 'base/base';
 
-// Colors
+// colors
 
 $medium-grey: #999;
 $white: #fff;
 
 $darkgrey50: rgba(21, 21, 21, .5);
+$darkgrey70: rgba(21, 21, 21, .7);
 $greyblue50: rgba(112, 121, 127, .5);
 $lightgrey30: rgba(125, 125, 125, .3);
 
 // compounded colors and gradients
 
+$darkgrey-overlay: linear-gradient($darkgrey70, $darkgrey70);
 $grey-overlay: linear-gradient($darkgrey50, $darkgrey50);
+
+// fonts
+
+$base-font-family: 'Montserrat', sans-serif;
+$heading-font-family: 'Amiko', sans-serif;
 
 // other
 
-$background-url: 'https://source.unsplash.com/igmaRVtMhqg/853x480';
+$background-url: 'https://source.unsplash.com/collection/623873/860x480';
 
 body {
   background: $grey-overlay, url($background-url) center center no-repeat;
   background-size: cover;
   color: $white;
+  margin: 0;
+  padding: 0;
 }
 
 button {
@@ -41,14 +50,35 @@ button {
   &:hover {
     background: $grey-overlay;
   }
+
+  &:focus {
+    background: transparent;
+    outline: 0;
+  }
 }
 
 h4 {
-  margin-top: .75rem;
+  font-size: 1rem;
+  margin: 1rem 0;
 }
 
 label {
   margin-bottom: 0;
+}
+
+.wn-overlay {
+  @include position(absolute, 0 0 0 0);
+  background: $darkgrey-overlay;
+  transition: all 500ms ease-in-out;
+  z-index: -1;
+
+  &.on {
+    opacity: 1;
+  }
+
+  &.off {
+    opacity: 0;
+  }
 }
 
 .wn-container {
@@ -62,16 +92,20 @@ label {
 
 .wn-player {
   align-items: center;
+  backdrop-filter: blur(10px);
   background: $grey-overlay;
   border: 2px $white solid;
   display: flex;
   flex-flow: row wrap;
   justify-content: center;
   max-height: 720px;
-  max-width: 380px;
+  max-width: 375px;
 }
 
 .wn-playpause {
+  border-bottom: 2px solid $white;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
   flex: 1 1 100%;
   min-height: 90px;
 
@@ -82,7 +116,7 @@ label {
 
 .wn-mastervolume {
   flex: 1 1 70%;
-  margin: 1.5rem;
+  margin: 1rem 1.5rem;
 }
 
 .wn-noisetype {
@@ -95,14 +129,15 @@ label {
   flex-flow: row wrap;
   justify-content: center;
   min-height: 150px;
+  text-transform: uppercase;
 
   h4 {
     flex: 1 1 100%;
     text-align: center;
-    text-transform: uppercase;
   }
 
   h5 {
+    font-size: .7rem;
     margin: 0 .5rem;
   }
 
@@ -110,8 +145,14 @@ label {
     border: 1px $white solid;
     border-radius: 6px;
     flex: 1 1 20%;
+    max-height: 28px;
     max-width: 20%;
-    padding: 1rem;
+    padding: .3rem;
+  }
+
+  .wn-type {
+    min-width: 60px;
+    text-align: center;
   }
 
   .wn-noisevolume {
@@ -151,8 +192,10 @@ label {
   min-height: 50px;
 
   h4 {
-    flex: 1;
+    //flex: 1;
+    line-height: 28px;
     margin: 0;
+    margin-right: 1rem;
     text-align: center;
     text-transform: uppercase;
   }
@@ -166,7 +209,7 @@ label {
 // On/Off Switch Styling
 
 .onoffswitch {
-  margin: auto;
+  //margin: auto;
   position: relative;
   user-select: none;
   width: 75px;
@@ -197,7 +240,7 @@ label {
   color: $white;
   display: block;
   float: left;
-  font-family: serif;
+  font-family: $base-font-family;
   font-size: 14px;
   height: 24px;
   line-height: 24px;

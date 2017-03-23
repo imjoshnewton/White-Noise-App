@@ -25,9 +25,11 @@ $(document).ready(function() {
       $ambianceVolume = $('.wn-ambiancevolume'),
       $prevSoundBtn = $('.wn-typebutton.left'),
       $nextSoundBtn = $('.wn-typebutton.right'),
-      $ambianceOnCheck = $('#wn-amb-onoff');
+      $ambianceOnCheck = $('#wn-amb-onoff'),
+      $lightsOnCheck = $('#wn-lights-onoff'),
+      $lightsOverlay = $('.wn-overlay');
 
-  $noiseType.html(audioplayer.getCurrentSound());
+  audioplayer.updateSoundDisplay($noiseType[0]);
 
   $playPauseBtn.click(function () {
     $(this).children('.fa').toggleClass('fa-play').toggleClass('fa-pause');
@@ -40,11 +42,11 @@ $(document).ready(function() {
   });
 
   $prevSoundBtn.click(function () {
-    audioplayer.prevSound();
+    audioplayer.prevSound().updateSoundDisplay($noiseType[0]);
   });
 
   $nextSoundBtn.click(function () {
-    audioplayer.nextSound();
+    audioplayer.nextSound().updateSoundDisplay($noiseType[0]);
   });
 
   $noiseVolume.on('input', function () {
@@ -57,5 +59,9 @@ $(document).ready(function() {
 
   $ambianceOnCheck.change(function () {
     audioplayer.toggleAmbiance();
+  });
+
+  $lightsOnCheck.change(function () {
+    $lightsOverlay.toggleClass('off').toggleClass('on');
   });
 });

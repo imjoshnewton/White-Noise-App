@@ -37,8 +37,7 @@ Player.prototype.init = function (soundsToLoad) {
     }
   }
 
-  this.setSoundVolume(this.soundVolume);
-  this.setAmbianceVolume(this.ambianceVolume);
+  this.setSoundVolume(this.soundVolume).setAmbianceVolume(this.ambianceVolume);
 };
 
 // Play the sound at the current sound index
@@ -103,8 +102,7 @@ Player.prototype.getCurrentSound = function () {
 Player.prototype.setMasterVolume = function (vol) {
   this.masterVolume = vol;
 
-  this.setSoundVolume();
-  this.setAmbianceVolume();
+  this.setSoundVolume().setAmbianceVolume();
 };
 
 // Set the volume of the noise group to a particular value adjusted for master volume
@@ -112,6 +110,8 @@ Player.prototype.setSoundVolume = function (vol) {
   this.soundVolume = vol || this.soundVolume;
 
   this.soundGroup.volume = this.soundVolume * this.masterVolume;
+
+  return this;
 };
 
 // Set the volume of the ambiance group to a particular value adjusted for master volume
@@ -119,6 +119,12 @@ Player.prototype.setAmbianceVolume = function (vol) {
   this.ambianceVolume = vol || this.ambianceVolume;
 
   this.ambianceGroup.volume = this.ambianceVolume * this.masterVolume;
+
+  return this;
+};
+
+Player.prototype.updateSoundDisplay = function (element) {
+  element.innerHTML = this.getCurrentSound();
 };
 
 Player.prototype.nextSound = function () {
@@ -129,6 +135,8 @@ Player.prototype.nextSound = function () {
   }
 
   if(!this.paused) { this.playCurrentSound(); }
+
+  return this;
 };
 
 Player.prototype.prevSound = function () {
@@ -139,4 +147,6 @@ Player.prototype.prevSound = function () {
   }
 
   if(!this.paused) { this.playCurrentSound(); }
+
+  return this;
 };

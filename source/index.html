@@ -5,6 +5,7 @@
 		<!-- Mobile optimization and mobile app abilities -->
 		<meta name="viewport" content="width=device-width initial-scale=1" />
 		<meta name="apple-mobile-web-app-capable" content="yes" />
+    <link href="https://fonts.googleapis.com/css?family=Amiko|Montserrat" rel="stylesheet">
 
 		<!-- Links to fave and movile icons and stylesheets -->
 		<link rel="icon" href="img/favicon.png" />
@@ -13,12 +14,14 @@
 	</head>
 
 	<body>
+    <div class="wn-overlay off">
+    </div>
 		<div class="wn-container"> <!--Page Container-->
 			<div class="wn-player"> <!--Player Container-->
         <button class="wn-playpause"><i class="fa fa-play" aria-hidden="true"></i></button>
         <input class="wn-mastervolume" type="range" min="0" max="100" value="90" step="1">
 
-        <div class="wn-noisetype">
+        <section class="wn-noisetype">
           <h4>type</h4>
 
           <button class="wn-typebutton left"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
@@ -26,9 +29,9 @@
           <button class="wn-typebutton right"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 
           <input class="wn-noisevolume" type="range" min="0" max="100" value="75" step="1">
-        </div>
+        </section>
 
-        <div class="wn-ambiance">
+        <section class="wn-ambiance">
           <h4>ambiance</h4>
 
           <div class="onoffswitch">
@@ -40,11 +43,18 @@
           </div>
 
           <input class="wn-ambiancevolume" type="range" min="0" max="100" value="75" step="1">
-        </div>
+        </section>
 
-        <button class="wn-lightstoggle">
-          <h4>turn down the lights</h4>
-        </button>
+        <section class="wn-lightstoggle">
+          <h4>lights</h4>
+          <div class="onoffswitch">
+              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="wn-lights-onoff" checked>
+              <label class="onoffswitch-label" for="wn-lights-onoff">
+                  <span class="onoffswitch-inner"></span>
+                  <span class="onoffswitch-switch"></span>
+              </label>
+          </div>
+        </section>
 
 			</div> <!--Player Container-->
 		</div> <!--Page Container-->
