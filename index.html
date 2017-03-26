@@ -2,7 +2,7 @@
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>Hello World!</title>
+    <title>White Noise</title>
 
     <link href="https://fonts.googleapis.com/css?family=Amiko|Montserrat" rel="stylesheet">
 
@@ -15,32 +15,36 @@
     <div class="wn-overlay off">
     </div>
 		<div class="wn-container"> <!--Page Container-->
+      <section class="wn-spacer">
+      </section>
 			<div class="wn-player"> <!--Player Container-->
         <button class="wn-playpause"><i class="fa fa-play" aria-hidden="true"></i></button>
         <input class="wn-mastervolume" type="range" min="0" max="100" value="90" step="1">
 
-        <section class="wn-noisetype">
-          <h4>type</h4>
+        <section class="wn-settings">
+          <section class="wn-noisetype">
+            <h4>type</h4>
 
-          <button class="wn-typebutton left"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
-          <h5 class="wn-type">NOISE</h5>
-          <button class="wn-typebutton right"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
+            <button class="wn-typebutton left"><i class="fa fa-angle-left" aria-hidden="true"></i></button>
+            <h5 class="wn-type"></h5>
+            <button class="wn-typebutton right"><i class="fa fa-angle-right" aria-hidden="true"></i></button>
 
-          <input class="wn-noisevolume" type="range" min="0" max="100" value="75" step="1">
-        </section>
+            <input class="wn-noisevolume" type="range" min="0" max="100" value="75" step="1">
+          </section>
 
-        <section class="wn-ambiance">
-          <h4>ambiance</h4>
+          <section class="wn-ambiance">
+            <h4>ambiance</h4>
 
-          <div class="onoffswitch">
-              <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="wn-amb-onoff" checked>
-              <label class="onoffswitch-label" for="wn-amb-onoff">
-                  <span class="onoffswitch-inner"></span>
-                  <span class="onoffswitch-switch"></span>
-              </label>
-          </div>
+            <div class="onoffswitch">
+                <input type="checkbox" name="onoffswitch" class="onoffswitch-checkbox" id="wn-amb-onoff" checked>
+                <label class="onoffswitch-label" for="wn-amb-onoff">
+                    <span class="onoffswitch-inner"></span>
+                    <span class="onoffswitch-switch"></span>
+                </label>
+            </div>
 
-          <input class="wn-ambiancevolume" type="range" min="0" max="100" value="75" step="1">
+            <input class="wn-ambiancevolume" type="range" min="0" max="100" value="75" step="1">
+          </section>
         </section>
 
         <section class="wn-lightstoggle">

@@ -43,30 +43,30 @@ $(document).ready(function() {
   });
 
   $masterVolume.on('input', function () {
-    //audioplayer.setMasterVolume($(this).val()/100);
+    audioplayer.setMasterVolume($(this).val()/100);
   });
 
   $prevSoundBtn.click(function () {
-    //audioplayer.prevSound().updateSoundDisplay($noiseType[0]);
+    audioplayer.prevSound().updateSoundDisplay($noiseType[0]);
   });
 
   $nextSoundBtn.click(function () {
-    //audioplayer.nextSound().updateSoundDisplay($noiseType[0]);
+    audioplayer.nextSound().updateSoundDisplay($noiseType[0]);
   });
 
   $noiseVolume.on('input', function () {
-    //audioplayer.setSoundVolume($(this).val()/100);
+    audioplayer.setSoundVolume($(this).val()/100);
   });
 
   $ambianceVolume.on('input', function () {
-    //audioplayer.setAmbianceVolume($(this).val()/100);
+    audioplayer.setAmbianceVolume($(this).val()/100);
   });
 
   $ambianceOnCheck.change(function () {
-    //audioplayer.toggleAmbiance();
+    audioplayer.toggleAmbiance();
   });
 
   $lightsOnCheck.change(function () {
-    //$lightsOverlay.toggleClass('off').toggleClass('on');
+    $lightsOverlay.toggleClass('off').toggleClass('on');
   });
 });
