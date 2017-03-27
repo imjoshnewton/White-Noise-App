@@ -10,14 +10,14 @@ var sourcemaps = require('gulp-sourcemaps');
 var imagemin = require('gulp-imagemin');
 
 gulp.task('sass', function () {
-  return gulp.src('sass/**/*.scss')
+  return gulp.src('app/sass/**/*.scss')
         .pipe(sourcemaps.init())
         .pipe(sass({
           outputStyle: 'compressed'
         })).on('error', gutil.log)
         .pipe(autoprefixer()).on('error', gutil.log)
         .pipe(sourcemaps.write())
-        .pipe(gulp.dest('css')).on('error', gutil.log)
+        .pipe(gulp.dest('app/css')).on('error', gutil.log)
         //.pipe(browserSync.reload({
         //  stream: true
         //}))

@@ -1,22 +1,39 @@
 {
-  "name": "electron-quick-start",
-  "version": "1.0.0",
-  "description": "A minimal Electron application",
+  "name": "White-Noise-App",
+  "version": "0.0.1",
+  "description": "A minimal White Noise and sound generator app made with Electron.",
   "main": "main.js",
   "scripts": {
-    "start": "gulp sass && electron ."
+    "start": "gulp sass && electron ./app --enable-logging",
+
+    "dist": "build --mac",
+
+    "prerelease:osx": "rm -rf release/osx && mkdirp release/osx",
+    "release:osx": "cp -rv dist/*.{dmg,zip} release/osx && PACKAGE_VERSION=$(cat app/package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && echo $PACKAGE_VERSION >> ./release/osx/VERSION",
+
+    "prerelease:win32": "rm -rf release/win32 && mkdirp release/win32",
+    "release:win32": "cp -v dist/win-ia32/{RELEASES,*.nupkg,*.exe} release/win32",
+
+    "prerelease:win64": "rm -rf release/win64 && mkdirp release/win64",
+    "release:win64": "cp -v dist/win/{RELEASES,*.nupkg,*.exe} release/win64",
+
+    "release": "npm run release:osx",
+
+    "all": "npm start && npm run dist"
   },
-  "repository": "https://github.com/electron/electron-quick-start",
+  "repository": "https://github.com/newtonjd1/White-Noise-App/tree/electron-app",
   "keywords": [
     "Electron",
-    "white",
+    "white noise",
     "ambiant",
     "noise"
   ],
-  "author": "GitHub",
+  "author": "Josh Newton",
   "license": "CC0-1.0",
   "devDependencies": {
     "electron": "~1.6.2",
+    "electron-builder": "^16.4.2",
+    "electron-packager": "^8.6.0",
     "gulp": "^3.9.1",
     "gulp-autoprefixer": "^3.1.1",
     "gulp-if": "^2.0.2",
@@ -29,5 +46,21 @@
     "gulp-util": "^3.0.8",
     "jquery": "^3.2.1",
     "pizzicato": "^0.6.0"
+  },
+  "build": {
+    "appId": "com.electron.${name}",
+    "productName": "White Noise App",
+    "mac": {
+      "category": "white-noise-app.audio.player",
+      "target": "dmg"
+    },
+    "dmg": {
+      "title": "White Noise App",
+      "icon": "build/icon.icns"
+    }
+  },
+  "dependencies": {
+    "jquery": "^3.2.1",
+    "pizzicato": "^0.6.1"
   }
 }
