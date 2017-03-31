@@ -60,30 +60,14 @@
 
 			</div> <!--Player Container-->
 		</div> <!--Page Container-->
-
-    <!--scripts-->
-    <script src="https://use.fontawesome.com/cc0b1539f7.js"></script>
-    <!--<script src="node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="node_modules/pizzicato/distr/Pizzicato.min.js"></script>
-    <script src="js/audio.js"></script>
-    <script src="js/main.js"></script>-->
   </body>
-  <!-- Insert this line above script imports  -->
-  <!--<script>if (typeof module === 'object') {window.module = module; module = undefined;}</script>-->
-
-  <!-- normal script imports etc  -->
-  <!--<script src="node_modules/jquery/dist/jquery.min.js"></script>
-  <script src="node_modules/pizzicato/distr/Pizzicato.min.js"></script>
-  <script src="js/audio.js"></script>
-  <script src="./renderer.js"></script>-->
 
   <script>
-  window.$ = window.jQuery = require('jquery')
-  var Pizzicato = require('pizzicato')
+    window.$ = window.jQuery = require('jquery')
+    var Pizzicato = require('pizzicato')
+    var jsonfile = require('jsonfile')
+    var Player = require('./js/audio.js')
+    require('./renderer.js')
   </script>
-  <script src="js/audio.js"></script>
-  <script src="./renderer.js"></script>
 
-  <!-- Insert this line after script imports -->
-  <!--<script>if (window.module) module = window.module;</script>-->
 </html>

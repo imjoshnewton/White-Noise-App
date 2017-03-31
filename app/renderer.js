@@ -2,9 +2,7 @@
 // be executed in the renderer process for that window.
 // All of the Node.js APIs are available in this process.
 
-var audioplayer = new Player();
-
-audioplayer.init([{
+var audioplayer = new Player([{
   name: 'noise',
   file: 'noise/00.mp3'
 }, {
@@ -20,6 +18,26 @@ audioplayer.init([{
   name: 'ambiance',
   file: 'ambiance/SomethingICanAlmostRemember.mp3'
 }]);
+
+//console.log(audioplayer);
+//console.log(Player);
+
+/*audioplayer.init([{
+  name: 'noise',
+  file: 'noise/00.mp3'
+}, {
+  name: 'crickets',
+  file: 'noise/Crickets2.mp3'
+}, {
+  name: 'vinyl',
+  file: 'noise/Vinyl.mp3'
+}, {
+  name: 'off',
+  file: 'noise/Empty.mp3'
+}, {
+  name: 'ambiance',
+  file: 'ambiance/SomethingICanAlmostRemember.mp3'
+}]);*/
 
 $(document).ready(function() {
 	var $playPauseBtn = $('.wn-playpause'),

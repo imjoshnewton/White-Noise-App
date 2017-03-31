@@ -1,6 +1,6 @@
 {
   "name": "White-Noise-App",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "A minimal White Noise and sound generator app made with Electron.",
   "main": "main.js",
   "scripts": {
@@ -32,6 +32,8 @@
   },
   "postinstall": "install-app-deps",
   "dependencies": {
+    "electron-config": "^0.2.1",
+    "font-awesome": "^4.7.0",
     "jquery": "^3.2.1",
     "pizzicato": "^0.6.1"
   }

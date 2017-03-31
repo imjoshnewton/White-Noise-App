@@ -1,45 +1,51 @@
 console.log("Loaded audio.js file");
 
-function Player () {
-  this.sounds = []; // All of the sounds the Player has access to
-  this.soundGroup = new Pizzicato.Group(); // Noise Group - primarily for adjusting the volume of all noise sounds at the same time
-  this.ambianceGroup = new Pizzicato.Group(); // Ambiance Group - same as noise group but for ambiance
-  this.currentSound = 0; // Index of the currenlty playing noise sound
-  this.highestNoiseIndex = 0; // Last index of a noise sound in the array - for referencing when ambiance sounds start
-  this.paused = true; // State variable used for toggling play and paused states
-  this.ambianceOn = true;
-  this.masterVolume = .75; // The master volume of the entire player
-  this.soundVolume = .9; // The volume of all noise sounds
-  this.ambianceVolume = .75; // The volume of all ambiance sounds
-};
+//const electron = require('electron');
 
-// Initializes the player with an array of objects that link the sound file to the sound name
-// Also sets up the sound groups and initializes the groups to the default volumes for the player
-Player.prototype.init = function (soundsToLoad) {
-  for(var i = 0;i < soundsToLoad.length;++i) {
-    this.sounds.push({
-      name: soundsToLoad[i].name,
-      sound: new Pizzicato.Sound({
-        source: 'file',
-        options: {
-          path: soundsToLoad[i].file,
-          loop: true,
-          attack: 0.3,
-          release: 0.3
-        }
-      })
-    });
+class Player {
+  constructor (soundsToLoad) {
+    this.sounds = []; // All of the sounds the Player has access to
+    this.soundGroup = new Pizzicato.Group(); // Noise Group - primarily for adjusting the volume of all noise sounds at the same time
+    this.ambianceGroup = new Pizzicato.Group(); // Ambiance Group - same as noise group but for ambiance
+    this.currentSound = 0; // Index of the currenlty playing noise sound
+    this.highestNoiseIndex = 0; // Last index of a noise sound in the array - for referencing when ambiance sounds start
+    this.paused = true; // State variable used for toggling play and paused states
+    this.ambianceOn = true;
+    this.masterVolume = .75; // The master volume of the entire player
+    this.soundVolume = .9; // The volume of all noise sounds
+    this.ambianceVolume = .75; // The volume of all ambiance sounds
+    this.settings = {};
 
-    if(this.sounds[i].name === 'ambiance') {
-      this.ambianceGroup.addSound(this.sounds[i].sound);
-      this.highestNoiseIndex = i - 1;
+    this.loadSounds(soundsToLoad);
+  };
+
+  loadSounds (soundsToLoad) {
+    for(var i = 0;i < soundsToLoad.length;++i) {
+      this.sounds.push({
+        name: soundsToLoad[i].name,
+        sound: new Pizzicato.Sound({
+          source: 'file',
+          options: {
+            path: soundsToLoad[i].file,
+            loop: true,
+            attack: 0.3,
+            release: 0.3
+          }
+        })
+      });
+
+      if(this.sounds[i].name === 'ambiance') {
+        this.ambianceGroup.addSound(this.sounds[i].sound);
+        this.highestNoiseIndex = i - 1;
+      }
+      else {
+        this.soundGroup.addSound(this.sounds[i].sound);
+      }
     }
-    else {
-      this.soundGroup.addSound(this.sounds[i].sound);
-    }
-  }
 
-  this.setSoundVolume(this.soundVolume).setAmbianceVolume(this.ambianceVolume);
+    this.setSoundVolume(this.soundVolume).setAmbianceVolume(this.ambianceVolume);
+  };
+
 };
 
 // Play the sound at the current sound index
@@ -152,3 +158,9 @@ Player.prototype.prevSound = function () {
 
   return this;
 };
+
+Player.prototype.saveSettings = function () {
+  return true;
+};
+
+module.exports = Player;

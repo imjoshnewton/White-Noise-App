@@ -11,6 +11,7 @@
 
 @import 'bourbon/bourbon';
 @import 'base/base';
+@import '../node_modules/font-awesome/scss/font-awesome';
 
 // colors
 
@@ -38,14 +39,17 @@ $heading-font-family: 'Amiko', sans-serif;
 $background-url: 'https://source.unsplash.com/collection/623873/860x480';
 
 body {
+  -webkit-app-region: drag;
   background: $grey-overlay, url($background-url) center center no-repeat;
   background-size: cover;
   color: $white;
   margin: 0;
   padding: 0;
+  user-select: none;
 }
 
 button {
+  -webkit-app-region: no-drag;
   background: transparent;
 
   &:hover {
@@ -58,9 +62,21 @@ button {
   }
 }
 
+input {
+  -webkit-app-region: no-drag;
+}
+
 h4 {
   font-size: 1rem;
   margin: 1rem 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  cursor: default;
 }
 
 label {
@@ -233,6 +249,7 @@ label {
 
 .onoffswitch {
   //margin: auto;
+  -webkit-app-region: no-drag;
   position: relative;
   user-select: none;
   width: 75px;
