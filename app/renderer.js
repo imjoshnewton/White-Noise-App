@@ -17,27 +17,7 @@ var audioplayer = new Player([{
 }, {
   name: 'ambiance',
   file: 'ambiance/SomethingICanAlmostRemember.mp3'
-}]);
-
-//console.log(audioplayer);
-//console.log(Player);
-
-/*audioplayer.init([{
-  name: 'noise',
-  file: 'noise/00.mp3'
-}, {
-  name: 'crickets',
-  file: 'noise/Crickets2.mp3'
-}, {
-  name: 'vinyl',
-  file: 'noise/Vinyl.mp3'
-}, {
-  name: 'off',
-  file: 'noise/Empty.mp3'
-}, {
-  name: 'ambiance',
-  file: 'ambiance/SomethingICanAlmostRemember.mp3'
-}]);*/
+}], document.getElementById('wn-loader'));
 
 $(document).ready(function() {
 	var $playPauseBtn = $('.wn-playpause'),
@@ -51,12 +31,11 @@ $(document).ready(function() {
       $lightsOnCheck = $('#wn-lights-onoff'),
       $lightsOverlay = $('.wn-overlay');
 
-  audioplayer.updateSoundDisplay($noiseType[0]);
+  audioplayer.initUI($noiseType[0], $noiseVolume[0], $ambianceVolume[0], $masterVolume[0], $ambianceOnCheck[0]);
 
   $playPauseBtn.click(function () {
     $(this).children('.fa').toggleClass('fa-play').toggleClass('fa-pause');
 
-    //console.log("PLAY / PAUSE");
     audioplayer.playPause();
   });
 

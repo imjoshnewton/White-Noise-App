@@ -18,22 +18,7 @@ gulp.task('sass', function () {
         .pipe(autoprefixer()).on('error', gutil.log)
         .pipe(sourcemaps.write())
         .pipe(gulp.dest('app/css')).on('error', gutil.log)
-        //.pipe(browserSync.reload({
-        //  stream: true
-        //}))
 })
-
-//gulp.task('useref', function () {
-//  return gulp.src('/**/*.html')
-//    .pipe(useref())
-//    .pipe(sourcemaps.init())
-//    .pipe(gulpIf('*.js', uglify())).on('error', gutil.log)
-//    .pipe(sourcemaps.write())
-//    .pipe(gulp.dest('.'))
-//    //.pipe(browserSync.reload({
-//    //  stream: true
-//    //}))
-//})
 
 gulp.task('audio', ['noise', 'ambiance']);
 
@@ -48,21 +33,11 @@ gulp.task('ambiance', function () {
 })
 
 gulp.task('images', function(){
-  return gulp.src('source/img/**/*.+(png|jpg|gif|svg)')
+  return gulp.src('app/img/**/*.+(png|jpg|gif|svg)')
   .pipe(imagemin())
   .pipe(gulp.dest('build/img'))
 })
 
-//gulp.task('browserSync', function () {
-//  browserSync.init({
-//    server: {
-//      baseDir: 'build'
-//    },
-//    browser: "google chrome"
-//  })
-//})
-
-gulp.task('default', ['sass', 'audio', 'images'], function () {
-  gulp.watch('source/css/**/*.scss', ['sass'])
-  //gulp.watch('source/js/**/*.js', ['useref'])
+gulp.task('default', ['sass'], function () {
+  gulp.watch('app/sass/**/*.scss', ['sass'])
 })

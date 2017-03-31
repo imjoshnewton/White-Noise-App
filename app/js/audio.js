@@ -1,9 +1,9 @@
 console.log("Loaded audio.js file");
 
-//const electron = require('electron');
+const Config = require('electron-config');
 
 class Player {
-  constructor (soundsToLoad) {
+  constructor (soundsToLoad, loader) {
     this.sounds = []; // All of the sounds the Player has access to
     this.soundGroup = new Pizzicato.Group(); // Noise Group - primarily for adjusting the volume of all noise sounds at the same time
     this.ambianceGroup = new Pizzicato.Group(); // Ambiance Group - same as noise group but for ambiance
@@ -14,12 +14,18 @@ class Player {
     this.masterVolume = .75; // The master volume of the entire player
     this.soundVolume = .9; // The volume of all noise sounds
     this.ambianceVolume = .75; // The volume of all ambiance sounds
-    this.settings = {};
+    this.totalFilesToLoad = 0;
+    this.fileItter = 0;
+    this.allFilesLoaded = false;
+    this.loadingElement = loader;
+    this.config = new Config();
 
     this.loadSounds(soundsToLoad);
   };
 
   loadSounds (soundsToLoad) {
+    this.totalFilesToLoad = soundsToLoad.length;
+
     for(var i = 0;i < soundsToLoad.length;++i) {
       this.sounds.push({
         name: soundsToLoad[i].name,
@@ -31,7 +37,21 @@ class Player {
             attack: 0.3,
             release: 0.3
           }
-        })
+        }, function () {
+          this.fileItter++;
+
+          console.log(this.fileItter + " of " + this.totalFilesToLoad + " sound files loaded...");
+
+          if(this.fileItter === this.totalFilesToLoad) {
+            this.allFilesLoaded = true;
+          }
+
+          if(this.allFilesLoaded) {
+            console.log("All files loaded!");
+
+            this.loadingElement.style.display = 'none';
+          }
+        }.bind(this))
       });
 
       if(this.sounds[i].name === 'ambiance') {
@@ -43,7 +63,58 @@ class Player {
       }
     }
 
+    this.initConfig();
+
     this.setSoundVolume(this.soundVolume).setAmbianceVolume(this.ambianceVolume);
+  };
+
+  initConfig () {
+    if(this.config.has('currentSound')) {
+      this.currentSound = this.config.get('currentSound');
+    } else {
+      this.config.set('cuurentSound', this.currentSound);
+    }
+
+    if(this.config.has('soundVolume')) {
+      this.soundVolume = this.config.get('soundVolume');
+    } else {
+      this.config.set('soundVolume', this.soundVolume);
+    }
+
+    if(this.config.has('ambianceVolume')) {
+      this.ambianceVolume = this.config.get('ambianceVolume');
+    } else {
+      this.config.set('ambianceVolume', this.ambianceVolume);
+    }
+
+    if(this.config.has('masterVolume')) {
+      this.masterVolume = this.config.get('masterVolume');
+    } else {
+      this.config.set('masterVolume', this.masterVolume);
+    }
+
+    if(this.config.has('ambianceOn')) {
+      this.ambianceOn = this.config.get('ambianceOn');
+    } else {
+      this.config.set('ambianceOn', this.ambianceOn);
+    }
+
+    console.log("Current Sound: " + this.currentSound);
+    console.log(this.currentSound);
+    console.log("Sound Volume: " + this.soundVolume);
+    console.log(this.soundVolume);
+    console.log("Ambiance Volume: " + this.ambianceVolume);
+    console.log(this.ambianceVolume);
+    console.log("Master Volume: " + this.masterVolume);
+    console.log(this.masterVolume);
+    console.log("Ambiance On: " + this.ambianceOn);
+    console.log(this.ambianceOn);
+  };
+
+  initUI (noiseEl, soundEl, ambianceEl, masterEl, ambianceOnEl) {
+    this.updateSoundDisplay(noiseEl);
+    this.updateVolumeDisplay(soundEl, ambianceEl, masterEl);
+    this.updateAmbianceControl(ambianceOnEl);
   };
 
 };
@@ -85,6 +156,7 @@ Player.prototype.toggleAmbiance = function () {
   }
 
   this.ambianceOn = !this.ambianceOn;
+  this.config.set('ambianceOn', this.ambianceOn);
 };
 
 // Toggle between playing and paused states
@@ -111,6 +183,7 @@ Player.prototype.setMasterVolume = function (vol) {
   this.masterVolume = vol;
 
   this.setSoundVolume().setAmbianceVolume();
+  this.config.set('masterVolume', this.masterVolume);
 };
 
 // Set the volume of the noise group to a particular value adjusted for master volume
@@ -118,6 +191,7 @@ Player.prototype.setSoundVolume = function (vol) {
   this.soundVolume = vol || this.soundVolume;
 
   this.soundGroup.volume = this.soundVolume * this.masterVolume;
+  this.config.set('soundVolume', this.soundVolume);
 
   return this;
 };
@@ -127,12 +201,23 @@ Player.prototype.setAmbianceVolume = function (vol) {
   this.ambianceVolume = vol || this.ambianceVolume;
 
   this.ambianceGroup.volume = this.ambianceVolume * this.masterVolume;
+  this.config.set('ambianceVolume', this.ambianceVolume);
 
   return this;
 };
 
 Player.prototype.updateSoundDisplay = function (element) {
   element.innerHTML = this.getCurrentSound();
+};
+
+Player.prototype.updateVolumeDisplay = function (element1, element2, element3) {
+  element1.value = this.soundVolume * 100;
+  element2.value = this.ambianceVolume * 100;
+  element3.value = this.masterVolume * 100;
+};
+
+Player.prototype.updateAmbianceControl = function (element) {
+  element.checked = this.ambianceOn;
 };
 
 Player.prototype.nextSound = function () {
@@ -143,6 +228,7 @@ Player.prototype.nextSound = function () {
   }
 
   if(!this.paused) { this.playCurrentSound(); }
+  this.config.set('currentSound', this.currentSound);
 
   return this;
 };
@@ -155,12 +241,9 @@ Player.prototype.prevSound = function () {
   }
 
   if(!this.paused) { this.playCurrentSound(); }
+  this.config.set('currentSound', this.currentSound);
 
   return this;
-};
-
-Player.prototype.saveSettings = function () {
-  return true;
 };
 
 module.exports = Player;

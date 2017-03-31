@@ -6,14 +6,33 @@ const BrowserWindow = electron.BrowserWindow
 
 const path = require('path')
 const url = require('url')
+const windowStateKeeper = require('electron-window-state');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
 let mainWindow
 
 function createWindow () {
+  // Load the previous state with fallback to defaults
+  let mainWindowState = windowStateKeeper({
+    defaultWidth: 375,
+    defaultHeight: 400
+  });
+
   // Create the browser window.
-  mainWindow = new BrowserWindow({width: 375, height: 400, titleBarStyle: 'hidden-inset', show: false, resizable: false, fullscreen: false, maximizable: false, fullscreenable: false})
+  mainWindow = new BrowserWindow({
+    x: mainWindowState.x,
+    y: mainWindowState.y,
+    width: mainWindowState.width,
+    height: mainWindowState.height,
+    titleBarStyle: 'hidden-inset',
+    show: false,
+    resizable: false,
+    fullscreen: false,
+    maximizable: false,
+    fullscreenable: false});
+
+  mainWindowState.manage(mainWindow);
 
   // and load the index.html of the app.
   mainWindow.loadURL(url.format({

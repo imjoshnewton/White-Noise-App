@@ -83,6 +83,21 @@ label {
   margin-bottom: 0;
 }
 
+.wn-loader {
+  @include position(fixed, 0 0 0 0);
+  align-items: center;
+  background: $darkgrey-overlay;
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  width: 100%;
+  z-index: 999999;
+
+  h1 {
+    color: $white;
+  }
+}
+
 .wn-overlay {
   @include position(absolute, 0 0 0 0);
   background: $darkgrey-overlay;
