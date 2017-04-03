@@ -3,10 +3,6 @@
   <head>
     <meta charset="UTF-8">
     <title>White Noise</title>
-
-		<!-- Links to fave and movile icons and stylesheets -->
-		<link rel="icon" href="img/favicon.png" />
-		<link rel="apple-touch-icon" href="img/favicon.png" />
 		<link rel="stylesheet" href="css/style.css" />
   </head>
   <body>
@@ -66,7 +62,7 @@
   <script>
     window.$ = window.jQuery = require('jquery')
     var Pizzicato = require('pizzicato')
-    var jsonfile = require('jsonfile')
+    const Config = require('electron-config');
     var Player = require('./js/audio.js')
     require('./renderer.js')
   </script>

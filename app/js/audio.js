@@ -1,7 +1,5 @@
 console.log("Loaded audio.js file");
 
-const Config = require('electron-config');
-
 class Player {
   constructor (soundsToLoad, loader) {
     this.sounds = []; // All of the sounds the Player has access to
@@ -100,15 +98,15 @@ class Player {
     }
 
     console.log("Current Sound: " + this.currentSound);
-    console.log(this.currentSound);
+    //console.log(this.currentSound);
     console.log("Sound Volume: " + this.soundVolume);
-    console.log(this.soundVolume);
+    //console.log(this.soundVolume);
     console.log("Ambiance Volume: " + this.ambianceVolume);
-    console.log(this.ambianceVolume);
+    //console.log(this.ambianceVolume);
     console.log("Master Volume: " + this.masterVolume);
-    console.log(this.masterVolume);
+    //console.log(this.masterVolume);
     console.log("Ambiance On: " + this.ambianceOn);
-    console.log(this.ambianceOn);
+    //console.log(this.ambianceOn);
   };
 
   initUI (noiseEl, soundEl, ambianceEl, masterEl, ambianceOnEl) {
