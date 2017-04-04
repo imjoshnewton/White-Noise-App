@@ -1,11 +1,11 @@
 {
   "name": "White-Noise-App",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "A minimal White Noise and sound generator app made with Electron.",
   "main": "main.js",
   "scripts": {
     "start": "concurrent \"gulp\" \"electron ./app --enable-logging\" ",
-    "dist": "build --mwl",
+    "dist": "build --mac",
     "prerelease:osx": "rm -rf release/osx && mkdirp release/osx",
     "release:osx": "cp -rv dist/*.{dmg,zip} release/osx && PACKAGE_VERSION=$(cat app/package.json | grep version | head -1 | awk -F: '{ print $2 }' | sed 's/[\",]//g' | tr -d '[[:space:]]') && echo $PACKAGE_VERSION >> ./release/osx/VERSION",
     "prerelease:win32": "rm -rf release/win32 && mkdirp release/win32",
